@@ -1,13 +1,19 @@
 /*---------------------------------------------*/
 //BNode class
 /*---------------------------------------------*/
-
+template <class T>
 BNode::BNode():left(NULL),right(NULL){   
 }
-BNode::BNode(int item):data(item),left(NULL),right(NULL){
+
+template <class T>
+BNode::BNode(T item):data(item),left(NULL),right(NULL){
 }
-BNode::BNode(int item, BNode* l, BNode* r):data(item),left(l),right(r){
+
+template <class T>
+BNode::BNode(T item, BNode* l, BNode* r):data(item),left(l),right(r){
 }
+
+template <class T>
 int BNode::GetData()const{
 		return data;
 }
@@ -15,7 +21,8 @@ int BNode::GetData()const{
 /*---------------------------------------------*/
 //Insert Helper
 /*---------------------------------------------*/
-bool BST::InsertHelp(int e, BNode*& n){
+template <class T>
+bool BST::InsertHelp(T e, BNode*& n){
     if(n==NULL){
         n=new BNode(e);
         cursor=n;
@@ -36,6 +43,7 @@ bool BST::InsertHelp(int e, BNode*& n){
 /*---------------------------------------------*/
 //PrintIn Helper
 /*---------------------------------------------*/
+template <class T>
 void BST::PrintInHelp(ostream& os, BNode* n){
     if(n!=NULL){
         //Print Left Subtree
@@ -52,6 +60,7 @@ void BST::PrintInHelp(ostream& os, BNode* n){
 /*---------------------------------------------*/
 //PrintPre Helper
 /*---------------------------------------------*/
+template <class T>
 void BST::PrintPreHelp(ostream& os, BNode* n){
     if(n!=NULL){
         //Print Root
@@ -68,6 +77,7 @@ void BST::PrintPreHelp(ostream& os, BNode* n){
 /*---------------------------------------------*/
 //PrintPost Helper
 /*---------------------------------------------*/
+template <class T>
 void BST::PrintPostHelp(ostream& os, BNode* n){
     if(n!=NULL){
         //Print Left Subtree
@@ -84,7 +94,8 @@ void BST::PrintPostHelp(ostream& os, BNode* n){
 /*---------------------------------------------*/
 //Find Helper
 /*---------------------------------------------*/
-BNode* BST::FindHelp(int e, BNode*n){
+template <class T>
+BNode* BST::FindHelp(T e, BNode*n){
 	if(n==NULL)
 		return NULL;
 	else if(n->data==e){
@@ -100,7 +111,8 @@ BNode* BST::FindHelp(int e, BNode*n){
 /*---------------------------------------------*/
 //Remove Helper
 /*---------------------------------------------*/
-bool BST::RemoveHelp(int e, BNode*& n){
+template <class T>
+bool BST::RemoveHelp(T e, BNode*& n){
 	if(n==NULL)
 		return false;
 	else if(e==n->data){
@@ -123,7 +135,7 @@ bool BST::RemoveHelp(int e, BNode*& n){
 		}
 		//Scenario 4: 2 children
 		else{
-			int minright=FindMin(n->right);
+			T minright=FindMin(n->right);
 			RemoveHelp(minright,n);
 			n->data=minright;
 		}
@@ -139,6 +151,7 @@ bool BST::RemoveHelp(int e, BNode*& n){
 /*---------------------------------------------*/
 //Destructor Helper
 /*---------------------------------------------*/
+template <class T>
 void BST::DeleteNode(BNode*& n){
 	if(n!=NULL){
 		DeleteNode(n->left);
@@ -150,6 +163,7 @@ void BST::DeleteNode(BNode*& n){
 /*---------------------------------------------*/
 //Find Minimum
 /*---------------------------------------------*/
+template <class T>
 int BST::FindMin(BNode* n)const{
 	if(n->left!=NULL)
 		return FindMin(n->left);
@@ -160,6 +174,7 @@ int BST::FindMin(BNode* n)const{
 /*---------------------------------------------*/
 //GoToNext Helper
 /*---------------------------------------------*/
+template <class T>
 void BST::GoToNextHelp(BNode* n,bool* flag){
     if(n!=NULL){
         //Traverse left subtree
@@ -182,6 +197,7 @@ void BST::GoToNextHelp(BNode* n,bool* flag){
 /*---------------------------------------------*/
 //GoToPrev Helper
 /*---------------------------------------------*/
+template <class T>
 void BST::GoToPrevHelp(BNode* n,bool* flag){
     if(n!=NULL){
         //Traverse Right Subtree
@@ -204,6 +220,7 @@ void BST::GoToPrevHelp(BNode* n,bool* flag){
 /*---------------------------------------------*/
 //GetHeight Helper
 /*---------------------------------------------*/
+template <class T>
 int BST::GetHeightHelp(BNode* n)const{
 	if(n!=NULL) {
 		int left=GetHeightHelp(n->left);
@@ -220,6 +237,7 @@ int BST::GetHeightHelp(BNode* n)const{
 /*---------------------------------------------*/
 //PrintInfo Helper
 /*---------------------------------------------*/
+template <class T>
 void BST::PrintInfoHelp(ostream& os, BNode* n){
     if(n!=NULL){
         //Print Left Subtree
@@ -246,12 +264,14 @@ void BST::PrintInfoHelp(ostream& os, BNode* n){
 /*---------------------------------------------*/
 //Constructor
 /*---------------------------------------------*/
+template <class T>
 BST::BST():root(NULL),cursor(NULL){
 }
 
 /*---------------------------------------------*/
 //Copy Constructor
 /*---------------------------------------------*/
+template <class T>
 BST::BST(const BST& sourcetree){
 	CopyList(root,sourcetree.root);
 }
@@ -259,6 +279,7 @@ BST::BST(const BST& sourcetree){
 /*---------------------------------------------*/
 //Destructor
 /*---------------------------------------------*/
+template <class T>
 BST::~BST(){
 	DeleteNode(root);
 }
@@ -266,6 +287,7 @@ BST::~BST(){
 /*---------------------------------------------*/
 //Assignment Operator
 /*---------------------------------------------*/
+template <class T>
 BST& BST::operator=(const BST& sourcetree){
 	CopyList(root,sourcetree.root);
 }
@@ -276,6 +298,7 @@ BST& BST::operator=(const BST& sourcetree){
 //I added 2 parameters to this, as I feel they are necessary.
 //-Tyler
 /*---------------------------------------------*/
+template <class T>
 void BST::CopyList(BNode*& cpy,BNode* src){
 	cpy = new BNode;
 	if(src!=NULL){
@@ -289,27 +312,31 @@ void BST::CopyList(BNode*& cpy,BNode* src){
 /*---------------------------------------------*/
 //Insert
 /*---------------------------------------------*/
-bool BST::Insert(int e){
+template <class T>
+bool BST::Insert(T e){
     return InsertHelp(e,root);
 }
 
 /*---------------------------------------------*/
 //Remove
 /*---------------------------------------------*/
-bool BST::Remove(int e){
+template <class T>
+bool BST::Remove(T e){
 	return RemoveHelp(e,root);
 }
 
 /*---------------------------------------------*/
 //Find
 /*---------------------------------------------*/
-BNode* BST::Find(int e){
+template <class T>
+BNode* BST::Find(T e){
     return FindHelp(e,root);//Note: this returns NULL if not found
 }
 
 /*---------------------------------------------*/
 //Pre-order
 /*---------------------------------------------*/
+template <class T>
 void BST::PrintPre(ostream& os){
 	PrintPreHelp(os,root);
 }
@@ -317,6 +344,7 @@ void BST::PrintPre(ostream& os){
 /*---------------------------------------------*/
 //In-order
 /*---------------------------------------------*/
+template <class T>
 void BST::PrintIn(ostream& os){
     PrintInHelp(os,root);
 }
@@ -324,6 +352,7 @@ void BST::PrintIn(ostream& os){
 /*---------------------------------------------*/
 //Post-order
 /*---------------------------------------------*/
+template <class T>
 void BST::PrintPost(ostream& os){
 	PrintPostHelp(os,root);
 }
@@ -331,6 +360,7 @@ void BST::PrintPost(ostream& os){
 /*---------------------------------------------*/
 //Returns the cursor
 /*---------------------------------------------*/
+template <class T>
 BNode* BST::AtCursor()const {
 	return cursor;
 }
@@ -338,6 +368,7 @@ BNode* BST::AtCursor()const {
 /*---------------------------------------------*/
 //Moves Cursor to beginning of list (smallest item)
 /*---------------------------------------------*/
+template <class T>
 void BST::GoToBeginning(){
 	cursor=root;
 	while(cursor->left!=NULL){
@@ -348,6 +379,7 @@ void BST::GoToBeginning(){
 /*---------------------------------------------*/
 //Moves Cursor to end of list (largest item)
 /*---------------------------------------------*/
+template <class T>
 void BST::GoToEnd(){
 	cursor=root;
 	while(cursor->right!=NULL){
@@ -358,6 +390,7 @@ void BST::GoToEnd(){
 /*---------------------------------------------*/
 //Moves Cursor to next largest item
 /*---------------------------------------------*/
+template <class T>
 void BST::GoToNext(){
 	bool* flag=new bool;
 	GoToNextHelp(root,flag);
@@ -366,6 +399,7 @@ void BST::GoToNext(){
 /*---------------------------------------------*/
 //Moves Cursor to next smallest item
 /*---------------------------------------------*/
+template <class T>
 void BST::GoToPrev(){
 	bool* flag=new bool;
 	GoToPrevHelp(root,flag);
@@ -374,6 +408,7 @@ void BST::GoToPrev(){
 /*---------------------------------------------*/
 //Clears the list
 /*---------------------------------------------*/
+template <class T>
 void BST::ClearList(){
 	DeleteNode(root);
 	root=NULL;
@@ -382,6 +417,7 @@ void BST::ClearList(){
 /*---------------------------------------------*/
 //Checks for empty list
 /*---------------------------------------------*/
+template <class T>
 bool BST::Empty()const{
 	if(root==NULL) return true;
 	else return false;
