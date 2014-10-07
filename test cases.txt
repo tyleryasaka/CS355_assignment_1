@@ -1,0 +1,108 @@
+insert
+	insert empty
+	insert left of head
+	insert right of head
+
+remove
+	remove empty
+	remove head
+	remove head no left
+	remove head no right
+	remove leaf
+	remove non-leaf right child
+	remove non-leaf left child
+	remove non-leaf 2 children
+	
+
+toBeginning
+	empty
+	head only
+	no left subtree
+	left subtree
+
+toEnd
+	empty
+	head only
+	no right subtree
+	right subtree
+	
+toNext
+	empty
+	head only
+	largest in left subtree
+	largest in right subtree
+	
+toPrev
+	empty
+	head only
+	smallest in left subtree
+	smallest in right subtree
+	
+Bst constructor
+	create list and print
+	
+Bst copy constructor
+	on empty
+	head only
+	left tree only
+	right tree only
+	left and right tree
+
+bst destructor
+	on empty
+	head only
+	left tree only
+	right tree only
+	left and right tree
+
+assignment operator
+	assign non empty to empty
+	assign empty to empty
+	assign non empty to non empty
+	assign empty to non empty
+
+search
+	on empty 
+	item not in tree
+	item is root
+	item is in left subtree
+	item is in right subtree
+
+printIn\pre\post
+	empty
+	head only
+	left tree
+	right tree
+	left and right tree
+
+atCursor
+	empty
+	head
+	left child
+	right child
+	when node cursor was at gets removed
+	when node cursor was at root and root is removed
+
+clearlist
+	After all clears see if empty, insert items, then print
+		clear empty 
+		clear only head
+		clear with left subtree
+		clear with right subtree
+		clear with both left and right subtrees
+		
+empty list
+	head only
+	empty list
+	non-empty list
+	have non-empty list clear list then see if empty
+	
+
+
+	
+
+
+
+
+
+	
