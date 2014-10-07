@@ -272,7 +272,7 @@ BST<T>::BST():root(NULL),cursor(NULL){
 //Copy Constructor
 /*---------------------------------------------*/
 template <class T>
-BST<T>::BST(const BST& sourcetree){
+BST<T>::BST(const BST<T>& sourcetree){
 	CopyList(root,sourcetree.root);
 }
 

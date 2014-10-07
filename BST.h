@@ -36,9 +36,9 @@ class BST{
 	void PrintInfoHelp(ostream& os, BNode<T>* n);
 public:
 	BST();
-	BST(const BST&);
+	BST(const BST<T>&);
 	~BST();
-	BST& operator=(const BST&);
+	BST& operator=(const BST<T>&);
 	bool Insert(T e);//cursor at insertion point
 	bool Remove(T e);//cursor at parent of removed item or at root
 	void PrintPre(ostream&);
