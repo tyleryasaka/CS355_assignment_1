@@ -1,9 +1,13 @@
-//CS 355 Assignment 1 - BST.h
 #ifndef BST_H
 #define BST_H
 
 #include <iostream>
 using namespace std;
+
+template <class T>
+class BST;
+template <class T>
+class BNode;
 
 template <class T>
 class BNode{
@@ -13,7 +17,7 @@ class BNode{
 	BNode();
 	BNode(T);
 	BNode(T, BNode*, BNode*);	
-	friend class BST;
+	friend class BST<T>;
 public:
 	int GetData()const;
 };
@@ -57,5 +61,6 @@ public:
 	void PrintInfo(ostream&); //print the tree inorder, include value, status, child count for each node
 };
 
-#endif
 #include "BST.cpp"
+#endif
+
