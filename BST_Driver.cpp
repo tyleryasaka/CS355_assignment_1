@@ -1,7 +1,6 @@
 //CS 355 BST Driver
 
 #include "BST.h"
-#include "BST.cpp"
 #include <iostream>
 #include <string>
 using namespace std;
