@@ -1,0 +1,127 @@
+constructor
+	create list and print
+
+copy constructor
+	on empty
+	head only
+	left tree only
+	right tree only
+	left and right tree
+
+destructor
+	on empty
+	head only
+	left tree only
+	right tree only
+	left and right tree
+
+assignment operator
+	assign non empty to empty
+	assign empty to empty
+	assign non empty to non empty
+	assign empty to non empty
+
+Insert()
+	insert empty
+	insert left of head
+	insert right of head
+
+Remove()
+	remove empty
+	remove head
+	remove head no left
+	remove head no right
+	remove leaf
+	remove non-leaf right child
+	remove non-leaf left child
+	remove non-leaf 2 children
+
+PrintIn()
+	empty
+	head only
+	left tree
+	right tree
+	left and right tree
+
+PrintPre()
+	empty
+	head only
+	left tree
+	right tree
+	left and right tree
+
+PrintPost()
+	empty
+	head only
+	left tree
+	right tree
+	left and right tree
+
+Find()
+	on empty 
+	item not in tree
+	item is root
+	item is in left subtree
+	item is in right subtree
+
+AtCursor()
+	empty
+	head
+	left child
+	right child
+	when node cursor was at gets removed
+	when node cursor was at root and root is removed
+
+GoToBeginning()
+	empty
+	head only
+	no left subtree
+	left subtree
+
+GoToEnd
+	empty
+	head only
+	no right subtree
+	right subtree
+	
+GoToNext()
+	empty
+	head only
+	largest in left subtree
+	largest in right subtree
+	
+GoToPrev()
+	empty
+	head only
+	smallest in left subtree
+	smallest in right subtree
+
+ClearList()
+	After all clears see if empty, insert items, then print
+		clear empty 
+		clear only head
+		clear with left subtree
+		clear with right subtree
+		clear with both left and right subtrees
+		
+EmptyList()
+	head only
+	empty list
+	non-empty list
+	have non-empty list clear list then see if empty
+	
+GetHeight()
+	empty list
+	root only
+	left branch only
+	right branch only
+	left and right branches, left branch longer
+	left and right brances, right branch longer
+	left and right branches, same length
+
+PrintInfo()
+	empty
+	head only
+	left tree
+	right tree
+	left and right tree
