@@ -2,29 +2,28 @@
 #include <iostream>
 using namespace std;
 
-template <class T>
 class BNode{
-	<T> data;
+	int data;
 	BNode* left;
 	BNode* right;
 	BNode();
-	BNode(T);
-	BNode(T, BNode*, BNode*);	
+	BNode(int);
+	BNode(int, BNode*, BNode*);	
 	friend class BST;
 public:
 	int GetData()const;
 };
 
-template <class T>
 class BST{
 	BNode* root;
 	BNode* cursor;
-	bool InsertHelp(T e, BNode*&);
+	bool InsertHelp(int e, BNode*&);
 	void PrintInHelp(ostream& os, BNode* n);
 	void PrintPreHelp(ostream& os, BNode* n);
 	void PrintPostHelp(ostream& os, BNode* n);
-	BNode* FindHelp(T e, BNode*n); 
-	bool RemoveHelp(T e, BNode*&); 
+	BNode* FindHelp(int e, BNode*n); 
+	bool RemoveHelp(int e, BNode*&); 
+	//Feel free to add Helper routines if you need them here
 	int FindMin(BNode* n)const;
 	void GoToNextHelp(BNode* n,bool* flag);
 	void GoToPrevHelp(BNode* n,bool* flag);
@@ -36,12 +35,12 @@ public:
 	BST(const BST&);
 	~BST();
 	BST& operator=(const BST&);
-	bool Insert(T e);//cursor at insertion point
-	bool Remove(T e);//cursor at parent of removed item or at root
+	bool Insert(int e);//cursor at insertion point
+	bool Remove(int e);//cursor at parent of removed item or at root
 	void PrintPre(ostream&);
 	void PrintPost(ostream&);
 	void PrintIn(ostream&);
-	BNode* Find(T e);//cursor at located node or rightmost node	
+	BNode* Find(int e);//cursor at located node or rightmost node	
 	BNode* AtCursor()const;
 	void GoToBeginning();
 	void GoToEnd();
