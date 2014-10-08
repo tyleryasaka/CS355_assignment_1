@@ -1,54 +1,66 @@
-//CS 355 Assignment 1 - BST.h
+#ifndef BST_H
+#define BST_H
+
 #include <iostream>
 using namespace std;
 
+template <class T>
+class BST;
+template <class T>
+class BNode;
+
+template <class T>
 class BNode{
-	int data;
-	BNode* left;
-	BNode* right;
+	T data;
+	BNode<T>* left;
+	BNode<T>* right;
 	BNode();
-	BNode(int);
-	BNode(int, BNode*, BNode*);	
-	friend class BST;
+	BNode(T);
+	BNode(T, BNode*, BNode*);	
+	friend class BST<T>;
 public:
 	int GetData()const;
 };
 
+template <class T>
 class BST{
-	BNode* root;
-	BNode* cursor;
-	bool InsertHelp(int e, BNode*&);
-	void PrintInHelp(ostream& os, BNode* n);
-	void PrintPreHelp(ostream& os, BNode* n);
-	void PrintPostHelp(ostream& os, BNode* n);
-	BNode* FindHelp(int e, BNode*n); 
-	bool RemoveHelp(int e, BNode*&); 
-	//Feel free to add Helper routines if you need them here
-	int FindMin(BNode* n)const;
-	void GoToNextHelp(BNode* n,bool* flag);
-	void GoToPrevHelp(BNode* n,bool* flag);
-	void DeleteNode(BNode*& n);
-	int GetHeightHelp(BNode* n)const;
-	void PrintInfoHelp(ostream& os, BNode* n);
+	BNode<T>* root;
+	BNode<T>* cursor;
+	bool InsertHelp(T e, BNode<T>*&);
+	void PrintInHelp(ostream& os, BNode<T>* n);
+	void PrintPreHelp(ostream& os, BNode<T>* n);
+	void PrintPostHelp(ostream& os, BNode<T>* n);
+	BNode<T>* FindHelp(T e, BNode<T>*n); 
+	bool RemoveHelp(T e, BNode<T>*&); 
+	int FindMin(BNode<T>* n)const;
+	void GoToNextHelp(BNode<T>* n,bool* flag);
+	void GoToPrevHelp(BNode<T>* n,bool* flag);
+	void DeleteNode(BNode<T>*& n);
+	int GetHeightHelp(BNode<T>* n)const;
+	void PrintInfoHelp(ostream& os, BNode<T>* n);
 public:
 	BST();
-	BST(const BST&);
+	BST(const BST<T>&);
 	~BST();
-	BST& operator=(const BST&);
-	bool Insert(int e);//cursor at insertion point
-	bool Remove(int e);//cursor at parent of removed item or at root
+	BST& operator=(const BST<T>&);
+	bool Insert(T e);//cursor at insertion point
+	bool Remove(T e);//cursor at parent of removed item or at root
 	void PrintPre(ostream&);
 	void PrintPost(ostream&);
 	void PrintIn(ostream&);
-	BNode* Find(int e);//cursor at located node or rightmost node	
-	BNode* AtCursor()const;
+	BNode<T>* Find(T e);//cursor at located node or rightmost node	
+	BNode<T>* AtCursor()const;
 	void GoToBeginning();
 	void GoToEnd();
 	void GoToNext();
 	void GoToPrev();
 	void ClearList();
-	void CopyList(BNode*& cpy,BNode* src);// to be called by copy constructor and assignment
+	void CopyList(BNode<T>*& cpy,BNode<T>* src);// to be called by copy constructor and assignment
 	bool Empty()const;
 	int GetHeight()const; // return the height of the tree
 	void PrintInfo(ostream&); //print the tree inorder, include value, status, child count for each node
 };
+
+#include "BST.cpp"
+#endif
+
