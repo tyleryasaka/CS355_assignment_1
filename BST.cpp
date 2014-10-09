@@ -1,4 +1,4 @@
-#include "bst.h"
+#include "BST.h"
 
 /*---------------------------------------------*/
 //BNode class
