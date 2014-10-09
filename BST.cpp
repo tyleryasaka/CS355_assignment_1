@@ -52,7 +52,9 @@ void BST<T>::PrintInHelp(ostream& os, BNode<T>* n){
         if(n->left!=NULL)
             PrintInHelp(os,n->left);
         //Print Root
-        os << n->data << " ";
+        if(n==cursor) os << "[" << n->data << "]";
+        else os << n->data;
+        os << "\t";
         //Print Right Subtree
         if(n->right!=NULL)
             PrintInHelp(os,n->right);
@@ -66,7 +68,9 @@ template <class T>
 void BST<T>::PrintPreHelp(ostream& os, BNode<T>* n){
     if(n!=NULL){
         //Print Root
-        os << n->data << " ";
+        if(n==cursor) os << "[" << n->data << "]";
+        else os << n->data;
+        os << "\t";
         //Print Left Subtree
         if(n->left!=NULL)
             PrintPreHelp(os,n->left);
@@ -89,7 +93,9 @@ void BST<T>::PrintPostHelp(ostream& os, BNode<T>* n){
         if(n->right!=NULL)
             PrintPostHelp(os,n->right);
         //Print Root
-        os << n->data << " ";
+        if(n==cursor) os << "[" << n->data << "]";
+        else os << n->data;
+        os << "\t";
     }
 }
 
@@ -98,8 +104,11 @@ void BST<T>::PrintPostHelp(ostream& os, BNode<T>* n){
 /*---------------------------------------------*/
 template <class T>
 BNode<T>* BST<T>::FindHelp(T e, BNode<T>*n){
-	if(n==NULL)
+	if(n==NULL){
+		//Moves cursor to end of list if not found
+		GoToEnd();
 		return NULL;
+	}
 	else if(n->data==e){
 		cursor=n;
 		return n;
@@ -114,9 +123,11 @@ BNode<T>* BST<T>::FindHelp(T e, BNode<T>*n){
 //Remove Helper
 /*---------------------------------------------*/
 template <class T>
-bool BST<T>::RemoveHelp(T e, BNode<T>*& n){
-	if(n==NULL)
+bool BST<T>::RemoveHelp(T e, BNode<T>*& n, BNode<T>* parent){
+	if(n==NULL){
+		cursor=root;
 		return false;
+	}
 	else if(e==n->data){
 		//Scenario 1: no children
 		if(n->left==NULL&&n->right==NULL){
@@ -138,16 +149,16 @@ bool BST<T>::RemoveHelp(T e, BNode<T>*& n){
 		//Scenario 4: 2 children
 		else{
 			T minright=FindMin(n->right);
-			RemoveHelp(minright,n);
+			RemoveHelp(minright,n->right,n);
 			n->data=minright;
 		}
-		cursor=root;
+		cursor=parent;
 		return true;
 	}
 	else if(e<n->data)
-		return RemoveHelp(e,n->left);
+		return RemoveHelp(e,n->left,n);
 	else
-		return RemoveHelp(e,n->right);
+		return RemoveHelp(e,n->right,n);
 }
 
 /*---------------------------------------------*/
@@ -194,6 +205,7 @@ void BST<T>::GoToNextHelp(BNode<T>* n,bool* flag){
         if(n->right!=NULL)
             GoToNextHelp(n->right,flag);
     }
+    else if(*flag) GoToBeginning();
 }
 
 /*---------------------------------------------*/
@@ -217,6 +229,7 @@ void BST<T>::GoToPrevHelp(BNode<T>* n,bool* flag){
         if(n->left!=NULL)
             GoToPrevHelp(n->left,flag);
     }
+    else if(*flag) GoToEnd();
 }
 
 /*---------------------------------------------*/
@@ -284,6 +297,8 @@ BST<T>::BST(const BST<T>& sourcetree){
 template <class T>
 BST<T>::~BST(){
 	DeleteNode(root);
+	root=NULL;
+	cursor=NULL;
 }
 
 /*---------------------------------------------*/
@@ -324,7 +339,7 @@ bool BST<T>::Insert(T e){
 /*---------------------------------------------*/
 template <class T>
 bool BST<T>::Remove(T e){
-	return RemoveHelp(e,root);
+	return RemoveHelp(e,root,NULL);
 }
 
 /*---------------------------------------------*/
@@ -414,6 +429,7 @@ template <class T>
 void BST<T>::ClearList(){
 	DeleteNode(root);
 	root=NULL;
+	cursor=NULL;
 }
 
 /*---------------------------------------------*/
