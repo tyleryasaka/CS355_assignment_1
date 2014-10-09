@@ -10,9 +10,9 @@ void PrintMenu();
 
 int main(){
 	
-	BST testBST;
-	BST testAssign;
-	BNode* temp;
+	BST<int> testBST;
+	BST<int> testAssign;
+	BNode<int>* temp;
 	int data;
 
 	PrintMenu();
@@ -23,7 +23,7 @@ int main(){
 	while(choice != 'q' && choice != 'Q'){
 		
 		if (choice == '!'){
-			BST testCopy(testBST);
+			BST<int> testCopy(testBST);
 			cout << "Result:" << "Print New Copy" << endl;
 			testCopy.PrintIn(cout); cout << endl;
 			testCopy.Insert(-10000);
