@@ -289,6 +289,9 @@ BST<T>::BST():root(NULL),cursor(NULL){
 template <class T>
 BST<T>::BST(const BST<T>& sourcetree){
 	CopyList(root,sourcetree.root);
+	
+	if(root)
+		cursor = root;
 }
 
 /*---------------------------------------------*/
