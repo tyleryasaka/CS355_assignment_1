@@ -299,9 +299,7 @@ BST<T>::BST(const BST<T>& sourcetree){
 /*---------------------------------------------*/
 template <class T>
 BST<T>::~BST(){
-	DeleteNode(root);
-	root=NULL;
-	cursor=NULL;
+	ClearList();
 }
 
 /*---------------------------------------------*/
