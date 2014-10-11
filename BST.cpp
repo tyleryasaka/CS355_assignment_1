@@ -212,24 +212,35 @@ void BST<T>::GoToNextHelp(BNode<T>* n,bool* flag){
 //GoToPrev Helper
 /*---------------------------------------------*/
 template <class T>
-void BST<T>::GoToPrevHelp(BNode<T>* n,bool* flag){
-    if(n!=NULL){
-        //Traverse Right Subtree
-        if(n->right!=NULL)
-            GoToPrevHelp(n->right,flag);
-        //Check n
-        if(*flag) {
-			cursor=n;
-			*flag=false;
-			return;
+void BST<T>::GoToPrevHelp(BNode<T>*& n,BNode<T>*& pre, BNode<T>*& suc, T key){
+	
+	if(!n) return;
+	
+	if(n->data == key){
+		if(n->left){
+			BNode<T>* temp = n->left;
+			while(temp->right)
+				temp = temp->right;
+			pre = temp;
 		}
-		if(n==cursor)
-			*flag=true;
-        //Traverse left subtree
-        if(n->left!=NULL)
-            GoToPrevHelp(n->left,flag);
-    }
-    else if(*flag) GoToEnd();
+		
+		if(n->right != NULL){
+			BNode<T>* temp = n->right;
+			while(temp->left)
+				temp = temp->left;
+		}
+		return;
+	}
+	
+	if(n->data > key){
+		suc = n;
+		GoToPrevHelp(n->left,pre,suc,key);
+	}
+	else{
+		pre = n;
+		GoToPrevHelp(n->right, pre, suc, key);
+	}
+	
 }
 
 /*---------------------------------------------*/
@@ -419,8 +430,23 @@ void BST<T>::GoToNext(){
 /*---------------------------------------------*/
 template <class T>
 void BST<T>::GoToPrev(){
-	bool* flag=new bool;
-	GoToPrevHelp(root,flag);
+	if(root){
+		BNode<T> * pre = 0;
+		BNode<T> * suc = 0;
+		GoToPrevHelp(root,pre,suc,cursor->data);
+		if(!pre){
+			if(root->right){
+				pre=root->right;
+				while(pre->right)
+					pre = pre->right;
+			}
+			else
+				pre = root;
+		}
+		cursor = pre;
+	}
+	else
+		cursor = 0;
 }
 
 /*---------------------------------------------*/
