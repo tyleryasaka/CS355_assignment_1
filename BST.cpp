@@ -376,9 +376,11 @@ BNode<T>* BST<T>::AtCursor()const {
 /*---------------------------------------------*/
 template <class T>
 void BST<T>::GoToBeginning(){
-	cursor=root;
-	while(cursor->left!=NULL){
-		cursor=cursor->left;
+	if(root!=NULL){
+		cursor=root;
+		while(cursor->left!=NULL){
+			cursor=cursor->left;
+		}
 	}
 }
 
@@ -387,9 +389,11 @@ void BST<T>::GoToBeginning(){
 /*---------------------------------------------*/
 template <class T>
 void BST<T>::GoToEnd(){
-	cursor=root;
-	while(cursor->right!=NULL){
-		cursor=cursor->right;
+	if(root!=NULL){
+		cursor=root;
+		while(cursor->right!=NULL){
+			cursor=cursor->right;
+		}
 	}
 }
 
