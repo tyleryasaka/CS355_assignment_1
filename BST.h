@@ -33,7 +33,6 @@ class BST{
 	BNode<T>* FindHelp(T e, BNode<T>*n); 
 	bool RemoveHelp(T e, BNode<T>*&, BNode<T>* parent); 
 	int FindMin(BNode<T>* n)const;
-	void GoToNextHelp(BNode<T>* n,bool* flag);
 	void GoToPrevHelp(BNode<T>*& n,BNode<T>*& pre, BNode<T>*& suc, T key);
 	void DeleteNode(BNode<T>*& n);
 	int GetHeightHelp(BNode<T>* n)const;

@@ -184,29 +184,6 @@ int BST<T>::FindMin(BNode<T>* n)const{
 		return n->data;
 }
 
-/*---------------------------------------------*/
-//GoToNext Helper
-/*---------------------------------------------*/
-template <class T>
-void BST<T>::GoToNextHelp(BNode<T>* n,bool* flag){
-    if(n!=NULL){
-        //Traverse left subtree
-        if(n->left!=NULL)
-            GoToNextHelp(n->left,flag);
-        //Check n
-        if(*flag) {
-			cursor=n;
-			*flag=false;
-			return;
-		}
-		if(n==cursor)
-			*flag=true;
-        //Traverse Right Subtree
-        if(n->right!=NULL)
-            GoToNextHelp(n->right,flag);
-    }
-    else if(*flag) GoToBeginning();
-}
 
 /*---------------------------------------------*/
 //GoToPrev Helper
@@ -421,8 +398,53 @@ void BST<T>::GoToEnd(){
 /*---------------------------------------------*/
 template <class T>
 void BST<T>::GoToNext(){
-	bool* flag=new bool;
-	GoToNextHelp(root,flag);
+	if( !root || !cursor){
+		cursor = 0;
+		return;
+	}
+	BNode<T>* newCur = 0;
+	BNode<T> * c = root;
+	BNode<T> * p = root;
+	bool flag = false;
+	//if cursor has right child;
+	if(cursor->right){
+		newCur = cursor->right;
+		while(newCur->left)
+			newCur = newCur->left;
+		flag = true;
+	}
+	//if no right children
+	else{
+		while(c){
+			if(c->data>cursor->data){
+				p = c;
+				flag = true;
+				c= c->left;
+			}
+			else if(c->data<cursor->data){
+				c = c->right;
+			}
+			else{
+				
+				newCur = p;
+				c = 0;
+			} 
+		}
+	}
+	
+	
+	if(flag)
+		cursor = newCur;
+	//cursor is at largest number
+	else{
+		newCur = root;
+		while(newCur->left)
+			newCur = newCur->left;
+		cursor = newCur;
+	}
+		
+		
+
 }
 
 /*---------------------------------------------*/
@@ -430,7 +452,7 @@ void BST<T>::GoToNext(){
 /*---------------------------------------------*/
 template <class T>
 void BST<T>::GoToPrev(){
-	if(root){
+	if(root && cursor){
 		BNode<T> * pre = 0;
 		BNode<T> * suc = 0;
 		GoToPrevHelp(root,pre,suc,cursor->data);
@@ -444,6 +466,7 @@ void BST<T>::GoToPrev(){
 				pre = root;
 		}
 		cursor = pre;
+		
 	}
 	else
 		cursor = 0;
