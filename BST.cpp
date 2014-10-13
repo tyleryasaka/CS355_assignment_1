@@ -125,7 +125,6 @@ BNode<T>* BST<T>::FindHelp(T e, BNode<T>*n){
 template <class T>
 bool BST<T>::RemoveHelp(T e, BNode<T>*& n, BNode<T>* parent){
 	if(n==NULL){
-		cursor=root;
 		return false;
 	}
 	else if(e==n->data){
@@ -152,7 +151,8 @@ bool BST<T>::RemoveHelp(T e, BNode<T>*& n, BNode<T>* parent){
 			RemoveHelp(minright,n->right,n);
 			n->data=minright;
 		}
-		cursor=parent;
+		if(parent!=NULL) cursor=parent;
+		else cursor=root;
 		return true;
 	}
 	else if(e<n->data)
