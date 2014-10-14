@@ -296,6 +296,7 @@ BST<T>::~BST(){
 template <class T>
 BST<T>& BST<T>::operator=(const BST<T>& sourcetree){
 	CopyList(root,sourcetree.root);
+    return *this;
 }
 
 /*---------------------------------------------*/
