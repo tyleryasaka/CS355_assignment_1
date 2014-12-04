@@ -2,7 +2,7 @@
 //CS355 Assignment 1
 //Dr. Janet Jenkins
 //
-//Project by Victor Rogers, Martin Tuck, Tyler Yasaka
+//Binary Search Tree by Victor Rogers, Martin Tuck, Tyler Yasaka
 /*-------------------------------------------------------*/
 
 #ifndef BST_H
